@@ -20,6 +20,7 @@ async function run() {
         const database = client.db("Maat");
         const teamsCollection = database.collection("teams");
         const expertiseCollection = database.collection("expertise");
+        const blogsCollection = database.collection("blogs");
 
         // all teams 
         app.get('/teams', async (req, res) => {
@@ -32,6 +33,12 @@ async function run() {
         app.get('/expertise', async (req, res) => {
             const expertise = await expertiseCollection.find({}).toArray();
             res.send(expertise);
+        });
+
+        // all blogs 
+        app.get('/blogs', async (req, res) => {
+            const blogs = await blogsCollection.find({}).toArray();
+            res.send(blogs);
         });
     }
 
