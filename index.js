@@ -21,6 +21,9 @@ async function run() {
         const teamsCollection = database.collection("teams");
         const expertiseCollection = database.collection("expertise");
         const blogsCollection = database.collection("blogs");
+        const storyCollection = database.collection("story");
+        const figuresCollection = database.collection("figures");
+        const officesCollection = database.collection("offices");
 
         // all teams 
         app.get('/teams', async (req, res) => {
@@ -39,6 +42,24 @@ async function run() {
         app.get('/blogs', async (req, res) => {
             const blogs = await blogsCollection.find({}).toArray();
             res.send(blogs);
+        });
+
+        // all story 
+        app.get('/story', async (req, res) => {
+            const story = await storyCollection.find({}).toArray();
+            res.send(story);
+        });
+
+        // all figures 
+        app.get('/figures', async (req, res) => {
+            const figures = await figuresCollection.find({}).toArray();
+            res.send(figures);
+        });
+
+        // all offices 
+        app.get('/offices', async (req, res) => {
+            const offices = await officesCollection.find({}).toArray();
+            res.send(offices);
         });
     }
 
