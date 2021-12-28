@@ -32,6 +32,12 @@ async function run() {
 
         });
 
+        // add expertise
+        app.post('/addExpertise', async (req, res) => {
+            const addExpertise = await expertiseCollection.insertOne(req.body);
+            res.send(addExpertise)
+        });
+
         // all teams 
         app.get('/expertise', async (req, res) => {
             const expertise = await expertiseCollection.find({}).toArray();
