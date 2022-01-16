@@ -3,12 +3,14 @@ const cors = require('cors');
 require('dotenv').config();
 const { MongoClient } = require('mongodb');
 const ObjectId = require('mongodb').ObjectId;
+const fileUpload = require("express-fileupload");
 
 const app = express();
 const port = process.env.PORT || 4040;
 
 app.use(cors());
 app.use(express.json());
+app.use(fileUpload());
 
 const uri = `mongodb+srv://${process.env.DB_USER}:${process.env.DB_PASS}@cluster0.r9gms.mongodb.net/myFirstDatabase?retryWrites=true&w=majority`;
 console.log(uri);
@@ -52,8 +54,31 @@ async function run() {
 
         // add blog
         app.post('/addBlog', async (req, res) => {
-            const addBlog = await blogsCollection.insertOne(req.body);
-            res.send(addBlog)
+
+
+            const title = req.body.title;
+            const category = req.body.category;
+            const sub_title = req.body.sub_title;
+            const publish = req.body.publish;
+            const description = req.body.description;
+            const sub_description = req.body.sub_description;
+            const blogImage = req.files.image;
+
+            const picImg = blogImage.data;
+            const mainImg = picImg.toString("base64");
+            const image = Buffer.from(mainImg, "base64");
+
+            const blog = {
+                title,
+                category,
+                sub_title,
+                publish,
+                description,
+                sub_description,
+                image
+            };
+            const result = await blogsCollection.insertOne(blog);
+            res.json(result);
         });
 
         // all blogs 
