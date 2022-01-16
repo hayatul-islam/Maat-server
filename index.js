@@ -55,7 +55,6 @@ async function run() {
         // add blog
         app.post('/addBlog', async (req, res) => {
 
-
             const title = req.body.title;
             const category = req.body.category;
             const sub_tittle = req.body.sub_title;
@@ -77,7 +76,6 @@ async function run() {
                 sub_description,
                 image
             };
-            console.log(blog);
             const result = await blogsCollection.insertOne(blog);
             res.json(result);
         });
@@ -90,6 +88,28 @@ async function run() {
 
         // add story
         app.post('/addStory', async (req, res) => {
+
+            const title = req.body.title;
+            const category = req.body.category;
+            const sub_tittle = req.body.sub_title;
+            const description = req.body.description;
+            const year = req.body.year;
+            const storyImage = req.files.image;
+
+            const picImg = storyImage.data;
+            const mainImg = picImg.toString("base64");
+            const image = Buffer.from(mainImg, "base64");
+
+            const blog = {
+                title,
+                category,
+                sub_tittle,
+                description,
+                year,
+                image
+            };
+            const result = await blogsCollection.insertOne(blog);
+            res.json(result);
             const addStory = await storyCollection.insertOne(req.body);
             res.send(addStory)
         });
