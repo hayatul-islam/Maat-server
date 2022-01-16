@@ -90,8 +90,8 @@ async function run() {
         app.post('/addStory', async (req, res) => {
 
             const title = req.body.title;
-            const category = req.body.category;
-            const sub_tittle = req.body.sub_title;
+            const about = req.body.about;
+            const sub_title = req.body.sub_title;
             const description = req.body.description;
             const year = req.body.year;
             const storyImage = req.files.image;
@@ -102,8 +102,8 @@ async function run() {
 
             const story = {
                 title,
-                category,
-                sub_tittle,
+                about,
+                sub_title,
                 description,
                 year,
                 image
