@@ -58,7 +58,7 @@ async function run() {
 
             const title = req.body.title;
             const category = req.body.category;
-            const sub_title = req.body.sub_title;
+            const sub_tittle = req.body.sub_title;
             const publish = req.body.publish;
             const description = req.body.description;
             const sub_description = req.body.sub_description;
@@ -71,12 +71,13 @@ async function run() {
             const blog = {
                 title,
                 category,
-                sub_title,
+                sub_tittle,
                 publish,
                 description,
                 sub_description,
                 image
             };
+            console.log(blog);
             const result = await blogsCollection.insertOne(blog);
             res.json(result);
         });
