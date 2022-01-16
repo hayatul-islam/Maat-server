@@ -29,8 +29,40 @@ async function run() {
 
         // add team
         app.post('/addTeam', async (req, res) => {
-            const addTeam = await teamsCollection.insertOne(req.body);
-            res.send(addTeam)
+
+            const name = req.body.name;
+            const job = req.body.job;
+            const job_status = req.body.job_status;
+            const email = req.body.email;
+            const linkedin = req.body.linkedin;
+            const location = req.body.location;
+            const published = req.body.published;
+            const about = req.body.about;
+            const mission = req.body.mission;
+            const requirements = req.body.requirements;
+            const benefit = req.body.benefit;
+            const teamImage = req.files.image;
+
+            const picImg = teamImage.data;
+            const mainImg = picImg.toString("base64");
+            const image = Buffer.from(mainImg, "base64");
+
+            const team = {
+                name,
+                job,
+                job_status,
+                email,
+                linkedin,
+                location,
+                published,
+                about,
+                mission,
+                requirements,
+                benefit,
+                image
+            };
+            const result = await teamsCollection.insertOne(team);
+            res.json(result);
         });
 
         // all teams 
