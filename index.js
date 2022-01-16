@@ -100,7 +100,7 @@ async function run() {
             const mainImg = picImg.toString("base64");
             const image = Buffer.from(mainImg, "base64");
 
-            const blog = {
+            const story = {
                 title,
                 category,
                 sub_tittle,
@@ -108,10 +108,8 @@ async function run() {
                 year,
                 image
             };
-            const result = await blogsCollection.insertOne(blog);
+            const result = await storyCollection.insertOne(story);
             res.json(result);
-            const addStory = await storyCollection.insertOne(req.body);
-            res.send(addStory)
         });
 
         // all story 
